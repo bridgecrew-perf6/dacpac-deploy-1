@@ -8,7 +8,7 @@ variable "env" {
 
 variable "workload" {
   type    = string
-  default = "portal"
+  default = "sql"
 }
 
 variable "region" {
