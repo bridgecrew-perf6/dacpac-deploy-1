@@ -13,6 +13,12 @@ resource "azurerm_mssql_server" "sql_server" {
   administrator_login          = local.sql_server_admin_username
   administrator_login_password = random_password.sql_server_admin_password.result
 
+  azuread_administrator {
+    login_username              = var.sql_server_aad_username
+    object_id                   = var.sql_server_aad_object_id
+    azuread_authentication_only = true
+  }
+
   public_network_access_enabled = true
 }
 
