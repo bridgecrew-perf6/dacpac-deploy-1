@@ -18,3 +18,12 @@ variable "region" {
 variable "instance" {
   type = string
 }
+
+// SQL Server
+variable "sql_server_aad_username" {
+  type    = string
+}
+
+variable "sql_server_aad_object_id" {
+  type    = string
+}
