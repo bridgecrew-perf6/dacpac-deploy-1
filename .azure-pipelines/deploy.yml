@@ -119,7 +119,7 @@ jobs:
         azureSubscription: '$(environmentServiceNameAzureRM)'
         ServerName: '$(sql_server_domain_name)'
         DatabaseName: '$(sql_database_name)'
-        AuthenticationType: aadAuthenticationIntegrated
+        AuthenticationType: servicePrincipal
         #SqlUsername: '$(sql_admin_username)'
         #SqlPassword: '$(sql_admin_password)'
         DacpacFile: '$(Pipeline.Workspace)/database/database.dacpac'
