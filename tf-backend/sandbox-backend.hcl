@@ -1,0 +1,5 @@
+subscription_id      = "9fa77179-17a5-42c2-a94b-833d58f5fa15"
+resource_group_name  = "rg-sandbox_tfstate-box-uksouth-01"
+storage_account_name = "sasandboxtfboxuksouth01"
+container_name       = "tfstate"
+key                  = "sandbox-box.tfstate"
