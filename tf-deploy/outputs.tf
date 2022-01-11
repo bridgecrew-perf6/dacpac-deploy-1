@@ -9,11 +9,11 @@ output "sql_database_name" {
 }
 
 output "sql_admin_username" {
-  value     = azurerm_key_vault_secret.sql_server_admin_username.value
+  value     = local.sql_server_admin_username
   sensitive = true
 }
 
 output "sql_admin_password" {
-  value     = azurerm_key_vault_secret.sql_server_admin_password.value
+  value     = random_password.sql_server_admin_password.result
   sensitive = true
 }
