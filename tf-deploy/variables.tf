@@ -8,7 +8,7 @@ variable "env" {
 
 variable "workload" {
   type    = string
-  default = "sql"
+  default = "dac"
 }
 
 variable "region" {
