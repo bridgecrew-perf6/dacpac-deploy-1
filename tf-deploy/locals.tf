@@ -11,6 +11,6 @@ locals {
 
   // AAD Group Names
   sql_server_admin_group_name = format("sg-ag-sql-%s-%s-%s-admins", var.workload, var.env, var.instance)
-  sampledb_readers_group_name   = format("sg-ag-sql-%s-%s-%s-sampledb-readers", var.workload, var.env, var.instance)
-  sampledb_writers_group_name   = format("sg-ag-sql-%s-%s-%s-sampledb-readers", var.workload, var.env, var.instance)
+  sampledb_readers_group_name = format("sg-ag-sql-%s-%s-%s-sampledb-readers", var.workload, var.env, var.instance)
+  sampledb_writers_group_name = format("sg-ag-sql-%s-%s-%s-sampledb-writers", var.workload, var.env, var.instance)
 }
