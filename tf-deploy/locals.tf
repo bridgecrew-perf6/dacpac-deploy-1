@@ -8,4 +8,9 @@ locals {
 
   // SQL Database
   sql_database_name = "McTest"
+
+  // AAD Group Names
+  sql_server_admin_group_name = format("sg-ag-sql-%s-%s-%s-admins", var.workload, var.env, var.instance)
+  mctest_readers_group_name   = format("sg-ag-sql-%s-%s-%s-mctest-readers", var.workload, var.env, var.instance)
+  mctest_writers_group_name   = format("sg-ag-sql-%s-%s-%s-mctest-readers", var.workload, var.env, var.instance)
 }
