@@ -26,7 +26,7 @@ resource "azurerm_mssql_server" "sql_server" {
   public_network_access_enabled = true
 }
 
-resource "azurerm_mssql_database" "portal_database" {
+resource "azurerm_mssql_database" "mssql_database" {
   name      = local.sql_database_name
   server_id = azurerm_mssql_server.sql_server.id
   collation = "SQL_Latin1_General_CP1_CI_AS"

@@ -117,4 +117,4 @@ jobs:
         DatabaseName: '$(sql_database_name)'
         AuthenticationType: servicePrincipal
         DacpacFile: '$(Pipeline.Workspace)/database/database.dacpac'
-        AdditionalArguments: '/Variables:env=dev /Variables:instance=01'
+        AdditionalArguments: '/Variables:env=box /Variables:instance=01'
