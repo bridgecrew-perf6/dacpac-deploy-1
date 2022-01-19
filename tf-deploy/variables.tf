@@ -23,12 +23,8 @@ variable "private_endpoints" {
   type = map(object({
     dns_zone             = string,
     link_id              = string,
-    request_message      = string,
+    request_message      = optional(string),
     type                 = list(string),
-    is_manual_connection = bool
+    is_manual_connection = optional(bool)
   }))
-  default = {
-    request_message      = "",
-    is_manual_connection = false
-  }
 }
