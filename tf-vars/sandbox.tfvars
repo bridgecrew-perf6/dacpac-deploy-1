@@ -11,12 +11,12 @@ private_endpoints = {
     request_message      = "Hi",
     type                 = ["blob"]
   },
-  pe-table = {
+  pe-blob-1 = {
     dns_zone             = "privatelink.blob.core.windows.net",
     link_id              = "/subscriptions/655da25d-da46-40c0-8e81-5debe2dcd024/resourcegroups/rg-test/providers/Microsoft.Storage/storageAccounts/asdatpetest",
     is_manual_connection = true,
     request_message      = "Hi2",
-    type                 = ["table"]
+    type                 = ["blob"]
   },
   pe-blob-2 = {
     dns_zone             = "privatelink.blob.core.windows.net",
