@@ -22,17 +22,17 @@ resource "azurerm_subnet" "example" {
 
 resource "azurerm_private_endpoint" "example" {
   for_each = var.private_endpoints
-  name = each.key
+  name     = each.key
 
   location            = azurerm_resource_group.core_resource_group.location
   resource_group_name = azurerm_resource_group.core_resource_group.name
   subnet_id           = azurerm_subnet.example.id
 
   private_service_connection {
-    name = each.value.key
+    name                           = each.key
     private_connection_resource_id = each.value.link_id
     is_manual_connection           = each.value.is_manual_connection
     subresource_names              = each.value.type
-    request_message = each.value.request_message
+    request_message                = each.value.request_message
   }
 }

@@ -16,29 +16,29 @@ variables:
   varFile: './../tf-vars/sandbox.tfvars'
 
 jobs:
-- job: BuildSqlDatabase
-
-  pool:
-    vmImage: windows-latest
-
-  steps:
-  - task: MSBuild@1
-    inputs:
-      solution: '**/database.sqlproj'
-      platform: 'AnyCPU'
-      configuration: 'Release'
-
-  - task: CopyFiles@2
-    inputs:
-      sourceFolder: '$(Build.SourcesDirectory)/src/database/bin/Release/'
-      targetFolder: '$(Build.ArtifactStagingDirectory)/database'
-
-  - publish: '$(Build.ArtifactStagingDirectory)/database'
-    displayName: Publish database artifact
-    artifact: database
+##- job: BuildSqlDatabase
+##
+##  pool:
+##    vmImage: windows-latest
+##
+##  steps:
+##  - task: MSBuild@1
+##    inputs:
+##      solution: '**/database.sqlproj'
+##      platform: 'AnyCPU'
+##      configuration: 'Release'
+##
+##  - task: CopyFiles@2
+##    inputs:
+##      sourceFolder: '$(Build.SourcesDirectory)/src/database/bin/Release/'
+##      targetFolder: '$(Build.ArtifactStagingDirectory)/database'
+##
+##  - publish: '$(Build.ArtifactStagingDirectory)/database'
+##    displayName: Publish database artifact
+##    artifact: database
 
 - job: TerraformPlanAndApply
-  dependsOn: BuildSqlDatabase
+  #dependsOn: BuildSqlDatabase
 
   variables:
     commandOptions: '-var-file="$(varFile)"'
@@ -93,28 +93,28 @@ jobs:
       name: terraform_output
       displayName: 'Pass-through Terraform Outputs'
 
-- job: DeploySqlDatabase
-  dependsOn: TerraformPlanAndApply
-
-  pool:
-    vmImage: windows-latest
-
-  variables:
-  - name: sql_server_domain_name
-    value: $[ dependencies.TerraformPlanAndApply.outputs['terraform_output.sql_server_domain_name'] ]
-  - name: sql_database_name
-    value: $[ dependencies.TerraformPlanAndApply.outputs['terraform_output.sql_database_name'] ]
-
-  steps: 
-    - download: current
-      displayName: 'Download database artifact'
-      artifact: database
-
-    - task: SqlAzureDacpacDeployment@1
-      inputs:
-        azureSubscription: '$(environmentServiceNameAzureRM)'
-        ServerName: '$(sql_server_domain_name)'
-        DatabaseName: '$(sql_database_name)'
-        AuthenticationType: servicePrincipal
-        DacpacFile: '$(Pipeline.Workspace)/database/database.dacpac'
-        AdditionalArguments: '/Variables:env=box /Variables:instance=01'
+##- job: DeploySqlDatabase
+##  dependsOn: TerraformPlanAndApply
+##
+##  pool:
+##    vmImage: windows-latest
+##
+##  variables:
+##  - name: sql_server_domain_name
+##    value: $[ dependencies.TerraformPlanAndApply.outputs['terraform_output.sql_server_domain_name'] ]
+##  - name: sql_database_name
+##    value: $[ dependencies.TerraformPlanAndApply.outputs['terraform_output.sql_database_name'] ]
+##
+##  steps: 
+##    - download: current
+##      displayName: 'Download database artifact'
+##      artifact: database
+##
+##    - task: SqlAzureDacpacDeployment@1
+##      inputs:
+##        azureSubscription: '$(environmentServiceNameAzureRM)'
+##        ServerName: '$(sql_server_domain_name)'
+##        DatabaseName: '$(sql_database_name)'
+##        AuthenticationType: servicePrincipal
+##        DacpacFile: '$(Pipeline.Workspace)/database/database.dacpac'
+##        AdditionalArguments: '/Variables:env=box /Variables:instance=01'
