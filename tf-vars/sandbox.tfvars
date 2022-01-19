@@ -22,6 +22,7 @@ private_endpoints = {
     dns_zone             = "privatelink.blob.core.windows.net",
     link_id              = "/subscriptions/9fa77179-17a5-42c2-a94b-833d58f5fa15/resourcegroups/rg-dac-box-uksouth-01/providers/Microsoft.Storage/storageAccounts/gregregreg",
     is_manual_connection = false,
+    request_message      = "",
     type                 = ["blob"]
   }
 }
