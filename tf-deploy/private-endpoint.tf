@@ -26,10 +26,11 @@ resource "azurerm_private_endpoint" "example" {
   resource_group_name = azurerm_resource_group.core_resource_group.name
   subnet_id           = azurerm_subnet.example.id
 
-  //private_service_connection {
-  //  name                           = "${random_string.random.result}-privateserviceconnection"
-  //  private_connection_resource_id = azurerm_mysql_server.example.id
-  //  subresource_names              = [ "mysqlServer" ]
-  //  is_manual_connection           = false
-  //}
+  private_service_connection {
+    name                           = "${random_string.random.result}-privateserviceconnection"
+    private_connection_resource_id = "/subscriptions/655da25d-da46-40c0-8e81-5debe2dcd024/resourcegroups/rg-test/providers/Microsoft.Storage/storageAccounts/asdatpetest"
+    subresource_names              = ["blob"]
+    is_manual_connection           = true
+    request_message                = "Hi"
+  }
 }
