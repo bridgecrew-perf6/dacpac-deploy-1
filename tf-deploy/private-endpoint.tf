@@ -21,16 +21,18 @@ resource "azurerm_subnet" "example" {
 }
 
 resource "azurerm_private_endpoint" "example" {
-  name                = "${random_string.random.result}-endpoint"
+  for_each = var.private_endpoints
+  name = each.key
+
   location            = azurerm_resource_group.core_resource_group.location
   resource_group_name = azurerm_resource_group.core_resource_group.name
   subnet_id           = azurerm_subnet.example.id
 
   private_service_connection {
-    name                           = "${random_string.random.result}-privateserviceconnection"
-    private_connection_resource_id = "/subscriptions/655da25d-da46-40c0-8e81-5debe2dcd024/resourcegroups/rg-test/providers/Microsoft.Storage/storageAccounts/asdatpetest"
-    subresource_names              = ["blob"]
-    is_manual_connection           = true
-    request_message                = "Hi"
+    name = each.value.key
+    private_connection_resource_id = each.value.link_id
+    is_manual_connection           = each.value.is_manual_connection
+    subresource_names              = each.value.type
+    request_message = each.value.request_message
   }
 }
