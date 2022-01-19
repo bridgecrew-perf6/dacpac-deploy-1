@@ -29,10 +29,19 @@ resource "azurerm_private_endpoint" "example" {
   subnet_id           = azurerm_subnet.example.id
 
   private_service_connection {
+    count                          = each.value.is_manual_connection == true ? 1 : 0
     name                           = each.key
     private_connection_resource_id = each.value.link_id
     is_manual_connection           = each.value.is_manual_connection
     subresource_names              = each.value.type
     request_message                = each.value.request_message
+  }
+
+  private_service_connection {
+    count                          = each.value.is_manual_connection == true ? 0 : 1
+    name                           = each.key
+    private_connection_resource_id = each.value.link_id
+    is_manual_connection           = false
+    subresource_names              = each.value.type
   }
 }
