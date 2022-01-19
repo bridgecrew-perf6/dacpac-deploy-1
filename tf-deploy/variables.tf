@@ -21,10 +21,14 @@ variable "instance" {
 
 variable "private_endpoints" {
   type = map(object({
-    dns_zone = string,
-    link_id  = string,
-    request_message = string,
-    type     = list(string),
+    dns_zone             = string,
+    link_id              = string,
+    request_message      = string,
+    type                 = list(string),
     is_manual_connection = bool
   }))
+  default = {
+    request_message      = "",
+    is_manual_connection = false
+  }
 }
